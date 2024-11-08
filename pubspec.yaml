@@ -1,0 +1,68 @@
+name: msbm_assessment_test
+description: A desktop application that receives websocket commands, creates a synchronization folder, and displays a taskbar icon for realtime sync and device status.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  watcher: ^1.1.0
+  change_case: ^2.1.0
+  path_provider: ^2.0.8
+  shared_preferences: ^2.0.11
+  url_launcher: ^6.1.2
+  http: ^1.1.0
+  intl: ^0.19.0
+  dart_jsonwebtoken: ^2.14.0
+  crypto: ^3.0.3
+  system_tray: ^2.0.3
+  flutter_native_splash: ^2.3.3
+  device_info_plus: ^10.1.0
+  cupertino_icons: ^1.0.2
+  windows_notification: ^1.3.0
+  flutter_local_notifications: ^18.0.0
+  image_picker: ^1.1.1
+  shimmer_animation: ^2.1.0+1
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # For our assets...
+  assets:
+    - assets/image/ # For all the images.
+    - assets/image/region # For all the images
+    - assets/icons/ # For all the icons.
+    - assets/icons/filled/ # For all the filled icons.
+
+  fonts:
+    - family: Archivo
+      fonts:
+        - asset: assets/font/100.ttf
+          weight: 100
+        - asset: assets/font/200.ttf
+          weight: 200
+        - asset: assets/font/300.ttf
+          weight: 300
+        - asset: assets/font/400.ttf
+          weight: 400
+        - asset: assets/font/500.ttf
+          weight: 500
+        - asset: assets/font/600.ttf
+          weight: 600
+        - asset: assets/font/700.ttf
+          weight: 700
+        - asset: assets/font/800.ttf
+          weight: 800
+        - asset: assets/font/900.ttf
+          weight: 900

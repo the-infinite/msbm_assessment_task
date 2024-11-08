@@ -1,0 +1,11 @@
+{
+	"editor.wordWrapColumn": 180,
+	"dart.flutterSdkPath": ".fvm/versions/stable",
+	"git.ignoredRepositories": [
+		"./fvm/versions/stable"
+	],
+	"cSpell.words": [
+		"msbm"
+	],
+	"cmake.ignoreCMakeListsMissing": true
+}
