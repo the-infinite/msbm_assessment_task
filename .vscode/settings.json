@@ -7,5 +7,14 @@
 	"cSpell.words": [
 		"msbm"
 	],
-	"cmake.ignoreCMakeListsMissing": true
+	"cmake.ignoreCMakeListsMissing": true,
+	"files.associations": {
+		"*.php": "php",
+		"*.h": "c",
+		"array": "cpp",
+		"string_view": "cpp",
+		"format": "cpp",
+		"initializer_list": "cpp",
+		"span": "cpp"
+	}
 }
