@@ -5,7 +5,7 @@ import 'package:msbm_assessment_test/controllers/theme.dart';
 import 'package:msbm_assessment_test/core/state/single_subscriber.dart';
 import 'package:flutter/gestures.dart';
 import 'package:msbm_assessment_test/core/base.dart';
-import 'package:msbm_assessment_test/data/theme.dart';
+import 'package:msbm_assessment_test/models/theme.dart';
 import 'package:msbm_assessment_test/helper/route.dart';
 import 'package:msbm_assessment_test/helper/app_constants.dart';
 

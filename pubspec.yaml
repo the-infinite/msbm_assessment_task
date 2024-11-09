@@ -42,6 +42,7 @@ flutter:
   # For our assets...
   assets:
     - assets/image/ # For all the images.
+    - assets/image/region/ # For all the images.
     - assets/icons/ # For all the icons.
     - assets/icons/filled/ # For all the filled icons.
 

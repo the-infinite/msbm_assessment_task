@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:msbm_assessment_test/screens/auth/login.dart';
+import 'package:msbm_assessment_test/controllers/auth.dart';
+import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/screens/auth/register.dart';
 import 'package:msbm_assessment_test/screens/home/entry.dart';
 import 'package:msbm_assessment_test/screens/not_found.dart';
@@ -13,7 +14,6 @@ class RouteHelper {
   // Others.
   static const _homeRoute = "/home";
   static const _welcomeRoute = "/";
-  static const _loginRoute = "/auth/login";
   static const _registerRoute = "/auth/register";
   static const _settingsRoute = "/settings";
 
@@ -22,10 +22,6 @@ class RouteHelper {
 
   /// The route to the welcome screen.
   static String getWelcomeRoute() => _welcomeRoute;
-
-  /// The route to the login activity. When a user is already logged into the
-  /// said environment, it would fetch the user's information kind of.
-  static String getLoginRoute() => _loginRoute;
 
   /// The route to the login activity. When a user is already logged into the
   /// said environment, it would fetch the user's information kind of.
@@ -39,6 +35,10 @@ class RouteHelper {
   /// Ths is is a helper function used to retrieve the initial route that should
   /// be viewed when the application is opened up.
   static String getInitialRoute([Object? data]) {
+    //? Since there is a user logged in, send them to the home route.
+    if (AppRegistry.find<AuthController>().isLoggedIn) return getHomeRoute();
+
+    //? Since there is no user logged in, send them to the welcoming route.
     return getWelcomeRoute();
   }
 
@@ -50,9 +50,6 @@ class RouteHelper {
     switch (path) {
       case _welcomeRoute:
         return const WelcomeScreen();
-
-      case _loginRoute:
-        return const LoginScreen();
 
       case _registerRoute:
         return const RegisterScreen();

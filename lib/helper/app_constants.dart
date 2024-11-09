@@ -26,20 +26,20 @@ class AppConstants {
 
   /// The list of countries that this version of the app has service in.
   static const servedRegions = [
-    // The country here.
-    Country(
-      name: "Togo",
-      shortCode: "TG",
-      dialCode: "+228",
-      flag: CountryFlags.tg,
-    ),
-
     // The country there.
     Country(
       name: "Nigeria",
       shortCode: "NG",
       dialCode: "+234",
       flag: CountryFlags.ng,
+    ),
+
+    // The country here.
+    Country(
+      name: "Togo",
+      shortCode: "TG",
+      dialCode: "+228",
+      flag: CountryFlags.tg,
     ),
 
     // The country there.

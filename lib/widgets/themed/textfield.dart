@@ -8,6 +8,7 @@ import 'package:msbm_assessment_test/helper/colors.dart';
 import 'package:msbm_assessment_test/helper/icons.dart';
 import 'package:msbm_assessment_test/helper/app_constants.dart';
 import 'package:msbm_assessment_test/helper/dimensions.dart';
+import 'package:msbm_assessment_test/helper/modals.dart';
 import 'package:msbm_assessment_test/helper/regions.dart';
 import 'package:msbm_assessment_test/helper/styles.dart';
 import 'package:msbm_assessment_test/widgets/compose/country_code_picker.dart';
@@ -357,20 +358,14 @@ class _StyledPhoneTextFieldState extends State<StyledPhoneTextField> {
     });
 
     // Do this fairly.
-    await showModalBottomSheet(
-      context: context,
-      showDragHandle: true,
-      isDismissible: true,
-      isScrollControlled: true,
-      builder: (context) {
-        return CountryCodePicker(
-          controller: widget.countryController,
-          countries: widget.countries,
-          dismiss: () {
-            AppRegistry.nav.pop();
-          },
-        );
-      },
+    await ModalHelper.showCustomDialog(
+      CountryCodePicker(
+        controller: widget.countryController,
+        countries: widget.countries,
+        dismiss: () {
+          AppRegistry.nav.pop();
+        },
+      ),
     );
 
     // Dismiss this lad.
@@ -536,16 +531,28 @@ class PhoneTextFieldController {
       return;
     }
 
-    //? If this starts with +234.
+    //? If this comes from Nigeria...
     if (phone.startsWith("+234")) {
       _textController.text = phone.substring(4);
       _currentCountry = AppConstants.servedRegions.firstWhere((country) => country.dialCode == "+234");
     }
 
-    //? If this does not start with +234...
-    else {
+    //? If this is a phone number from Togo.
+    else if (phone.startsWith("+228")) {
+      _textController.text = phone.substring(4);
+      _currentCountry = AppConstants.servedRegions.firstWhere((country) => country.dialCode == "+228");
+    }
+
+    //? If this comes from the UK.
+    else if (phone.startsWith("+44")) {
       _textController.text = phone.substring(3);
       _currentCountry = AppConstants.servedRegions.firstWhere((country) => country.dialCode == "+44");
+    }
+
+    //? We just assume it is the united states.
+    else {
+      _textController.text = phone.substring(2);
+      _currentCountry = AppConstants.servedRegions.firstWhere((country) => country.dialCode == "+1");
     }
   }
 

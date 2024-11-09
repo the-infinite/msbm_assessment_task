@@ -1,6 +1,6 @@
 import 'package:msbm_assessment_test/core/data/repo.dart';
 import 'package:msbm_assessment_test/core/state/state.dart';
-import 'package:msbm_assessment_test/data/theme.dart';
+import 'package:msbm_assessment_test/models/theme.dart';
 
 class ThemeController extends StateController<ThemeState, DataRepository> {
   /// Is the app currently in dark theme?
