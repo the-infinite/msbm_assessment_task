@@ -76,6 +76,7 @@ Future<void> main() async {
     win.alignment = Alignment.center;
     win.title = AppConstants.appName;
     win.show();
+    win.maximize();
   });
 
   // Run the app.

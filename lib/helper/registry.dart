@@ -10,6 +10,7 @@ import 'package:msbm_assessment_test/repositories/app.dart';
 import 'package:msbm_assessment_test/repositories/auth.dart';
 import 'package:msbm_assessment_test/repositories/filesystem.dart';
 import 'package:msbm_assessment_test/repositories/settings.dart';
+import 'package:msbm_assessment_test/screens/home/logic/navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A helper class that has the sole function of initializing the initial state
@@ -26,6 +27,7 @@ class RegistryHelper {
     AppRegistry.register(prefs);
     AppRegistry.register(AppClient());
     AppRegistry.register(InterceptorController());
+    AppRegistry.register(NavigationController(0));
 
     // Third, the controllers.
     AppRegistry.register(ThemeController(false));

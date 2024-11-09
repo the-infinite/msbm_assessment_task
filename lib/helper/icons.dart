@@ -48,9 +48,30 @@ class AppIcons {
   /// The official icon we use in the app to illustrate the test environment.
   static const environmentTest = "assets/icons/env_test.svg";
 
+  /// The icon used to remove a file from a given directory.
+  static const fileRemove = "assets/icons/file_remove.svg";
+
+  /// The icon used to indicate a filesystem entity that is a file.
+  static const file = "assets/icons/file.svg";
+
   /// The filter icon used to indicate filters that can be used to narrow down
   /// searches on the front-end.
   static const filter = "assets/icons/filter.svg";
+
+  /// The icon used to create a new folder.
+  static const folderAdd = "assets/icons/folder_add.svg";
+
+  /// The icon used to show or refer to a group of folders.
+  static const folderAll = "assets/icons/folder_all.svg";
+
+  /// The icon used to remove a folder.
+  static const folderRemove = "assets/icons/folder_remove.svg";
+
+  /// The icon used to to navigate backward to the parent folder.
+  static const folderUp = "assets/icons/folder_add.svg";
+
+  /// The icon used to indicate a folder.
+  static const folder = "assets/icons/folder.svg";
 
   /// The navigation icon we use to indicate the health of our services on the
   /// front-end.
