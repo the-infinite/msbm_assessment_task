@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:msbm_assessment_test/app.dart';
 import 'package:msbm_assessment_test/core/base.dart';
+import 'package:msbm_assessment_test/helper/app_constants.dart';
 import 'package:msbm_assessment_test/helper/data.dart';
 import 'package:msbm_assessment_test/helper/notification.dart';
 import 'package:msbm_assessment_test/helper/registry.dart';
@@ -15,7 +17,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// This is fair enough.
 final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-Future<void> _startAppState() async {}
+Future<void> _startAppState() async {
+  await initializeTray();
+}
 
 Future<void> main() async {
   // First, set the URL strategy.
@@ -62,6 +66,17 @@ Future<void> main() async {
     await AppRegistry.find<SharedPreferences>().clear();
     AppRegistry.debugLog(e, "Startup.Error");
   }
+
+  // Configure this window.
+  doWhenWindowReady(() {
+    final win = appWindow;
+    const initialSize = Size(1280, 720);
+    win.minSize = initialSize;
+    win.size = initialSize;
+    win.alignment = Alignment.center;
+    win.title = AppConstants.appName;
+    win.show();
+  });
 
   // Run the app.
   runApp(const MyApp()); // Run the app.

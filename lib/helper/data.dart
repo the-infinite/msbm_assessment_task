@@ -147,13 +147,19 @@ Future<void> initializeTray() async {
   await trayManager.setIcon(
     Platform.isWindows ? 'images/tray_icon.ico' : Images.launcherIcon,
   );
+
+  //? This is the menu we are using...
   Menu menu = Menu(
     items: [
+      //? First, for the how button...
       MenuItem(
         key: 'show_window',
-        label: 'Show Window',
+        label: 'Show/Hide Window',
       ),
+
+      // Some space.
       MenuItem.separator(),
+      //? Finally, for exiting the app.
       MenuItem(
         key: 'exit_app',
         label: 'Exit App',

@@ -1,7 +1,7 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:msbm_assessment_test/controllers/app.dart';
+import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/core/widget/boundary.dart';
-import 'package:msbm_assessment_test/helper/data.dart';
 import 'package:tray_manager/tray_manager.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +15,6 @@ class _HomeScreenState extends State<HomeScreen> with TrayListener {
   @override
   void initState() {
     trayManager.addListener(this);
-    initializeTray();
     super.initState();
   }
 
@@ -27,12 +26,24 @@ class _HomeScreenState extends State<HomeScreen> with TrayListener {
 
   @override
   void onTrayIconMouseDown() {
-    appWindow.show();
+    trayManager.popUpContextMenu();
   }
 
   @override
   void onTrayIconRightMouseDown() {
     trayManager.popUpContextMenu();
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    switch (menuItem.key) {
+      case "show_window":
+        AppRegistry.find<AppController>().toggleWindow();
+        break;
+
+      default:
+        break;
+    }
   }
 
   @override
