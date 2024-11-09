@@ -5,6 +5,7 @@
 		"./fvm/versions/stable"
 	],
 	"cSpell.words": [
+		"bitsdojo",
 		"msbm"
 	],
 	"cmake.ignoreCMakeListsMissing": true,

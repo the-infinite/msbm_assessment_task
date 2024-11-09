@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:msbm_assessment_test/helper/images.dart';
+import 'package:tray_manager/tray_manager.dart';
 
 /// A class that models the device specifications of this device that is the
 /// client which is connecting to the
@@ -138,4 +140,26 @@ String decrypt(String key, String cipher) {
 /// to locally store the admin's OTP.
 String hash(String payload) {
   return sha512.convert(utf8.encode(payload)).toString();
+}
+
+/// A utility function used to
+Future<void> initializeTray() async {
+  await trayManager.setIcon(
+    Platform.isWindows ? 'images/tray_icon.ico' : Images.launcherIcon,
+  );
+  Menu menu = Menu(
+    items: [
+      MenuItem(
+        key: 'show_window',
+        label: 'Show Window',
+      ),
+      MenuItem.separator(),
+      MenuItem(
+        key: 'exit_app',
+        label: 'Exit App',
+      ),
+    ],
+  );
+
+  await trayManager.setContextMenu(menu);
 }

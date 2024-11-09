@@ -3,8 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  bitsdojo_window_windows
   file_selector_windows
-  system_tray
+  tray_manager
   url_launcher_windows
   windows_notification
 )

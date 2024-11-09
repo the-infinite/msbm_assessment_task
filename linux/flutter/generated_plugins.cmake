@@ -3,8 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  bitsdojo_window_linux
   file_selector_linux
-  system_tray
+  tray_manager
   url_launcher_linux
 )
 

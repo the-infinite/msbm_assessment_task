@@ -29,6 +29,9 @@ class Images {
   /// Image representing the Paystack Payments logo.
   static const paystack = 'assets/image/paystack.png';
 
+  /// Image representing the launcher icon.
+  static const launcherIcon = 'assets/image/launcher_icon.png';
+
   /// Image representing the Stripe Payments logo.
   static const stripe = 'assets/image/stripe.svg';
 }
