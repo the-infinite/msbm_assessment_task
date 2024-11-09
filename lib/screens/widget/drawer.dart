@@ -5,8 +5,8 @@ import 'package:msbm_assessment_test/helper/colors.dart';
 import 'package:msbm_assessment_test/helper/dimensions.dart';
 import 'package:msbm_assessment_test/helper/icons.dart';
 import 'package:msbm_assessment_test/helper/styles.dart';
-import 'package:msbm_assessment_test/screens/home/logic/navigation.dart';
-import 'package:msbm_assessment_test/screens/home/widget/navigation.dart';
+import 'package:msbm_assessment_test/controllers/navigation.dart';
+import 'package:msbm_assessment_test/screens/widget/navigation.dart';
 import 'package:msbm_assessment_test/widgets/avatar_image.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {

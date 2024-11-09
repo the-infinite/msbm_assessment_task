@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:msbm_assessment_test/helper/colors.dart';
 import 'package:msbm_assessment_test/helper/dimensions.dart';
-import 'package:msbm_assessment_test/screens/home/logic/navigation.dart';
+import 'package:msbm_assessment_test/controllers/navigation.dart';
 import 'package:msbm_assessment_test/widgets/themed/buttons.dart';
 
 class NavigationDrawerButtonWidget extends StatelessWidget {

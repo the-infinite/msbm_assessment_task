@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:msbm_assessment_test/controllers/app.dart';
 import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/core/widget/boundary.dart';
-import 'package:msbm_assessment_test/screens/home/widget/drawer.dart';
+import 'package:msbm_assessment_test/controllers/navigation.dart';
+import 'package:msbm_assessment_test/helper/dimensions.dart';
+import 'package:msbm_assessment_test/screens/drive/entry.dart';
+import 'package:msbm_assessment_test/screens/not_found.dart';
+import 'package:msbm_assessment_test/screens/widget/drawer.dart';
+import 'package:msbm_assessment_test/screens/settings/entry.dart';
 import 'package:tray_manager/tray_manager.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -77,11 +82,18 @@ class _HomeScreenState extends State<HomeScreen> with TrayListener {
 
               //? Second, for the main content...
               Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Container(),
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
+                  child: ValueListenableBuilder(
+                    valueListenable: AppRegistry.find<NavigationController>(),
+                    builder: (context, value, child) => switch (value) {
+                      0 => const DriveScreen(),
+                      1 => const SettingsScreen(),
+                      _ => const NotFoundScreen(),
+                    },
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
