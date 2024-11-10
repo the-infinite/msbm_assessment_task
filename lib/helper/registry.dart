@@ -2,6 +2,7 @@ import 'package:msbm_assessment_test/controllers/app.dart';
 import 'package:msbm_assessment_test/controllers/auth.dart';
 import 'package:msbm_assessment_test/controllers/filesystem.dart';
 import 'package:msbm_assessment_test/controllers/settings.dart';
+import 'package:msbm_assessment_test/controllers/socket.dart';
 import 'package:msbm_assessment_test/controllers/theme.dart';
 import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/core/client.dart';
@@ -11,6 +12,7 @@ import 'package:msbm_assessment_test/repositories/auth.dart';
 import 'package:msbm_assessment_test/repositories/filesystem.dart';
 import 'package:msbm_assessment_test/repositories/settings.dart';
 import 'package:msbm_assessment_test/controllers/navigation.dart';
+import 'package:msbm_assessment_test/repositories/socket.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A helper class that has the sole function of initializing the initial state
@@ -35,6 +37,7 @@ class RegistryHelper {
     AppRegistry.register(SettingsController(repo: SettingsRepository()));
     AppRegistry.register(AppController(repo: AppRepository()));
     AppRegistry.register(FilesystemController(repo: FilesystemRepository()));
+    AppRegistry.register(WebSocketController(repo: WebSocketRepository()));
 
     // Log this.
     AppRegistry.debugLog("Helpers.AppRegistry: Initialized successfully.");

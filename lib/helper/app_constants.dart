@@ -23,6 +23,7 @@ class AppConstants {
   static const String localization = "X-MSBM-Locale";
   static const String device = "X-MSBM-Device";
   static const String session = "X-MSBM-Auth";
+  static const String settings = "X-MSBM-Settings";
   static const String filesystem = "X-MSBM-FS";
 
   /// The list of countries that this version of the app has service in.
