@@ -165,7 +165,7 @@ Future<void> initializeTray() async {
         //? First, the option to go to the sync folder.
         MenuItem(
           key: 'open_drive',
-          label: 'Open Drive Folder',
+          label: 'Open Sync Folder',
           onClick: (item) => launchUrl(driveFolder.uri),
         ),
 
