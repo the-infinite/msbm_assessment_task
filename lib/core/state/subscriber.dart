@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/src/services/predictive_back_event.dart';
 import 'package:flutter/widgets.dart';
 import 'package:msbm_assessment_test/core/app/error.dart';
 import 'package:msbm_assessment_test/core/state/state.dart';
@@ -102,6 +103,23 @@ class StateSubscriberWidget extends StatefulWidget implements _WBO {
   Future<AppExitResponse> didRequestAppExit() async {
     return AppExitResponse.exit;
   }
+
+  @override
+  void didChangeViewFocus(ViewFocusEvent event) {}
+
+  @override
+  void handleCancelBackGesture() {}
+
+  @override
+  void handleCommitBackGesture() {}
+
+  @override
+  bool handleStartBackGesture(PredictiveBackEvent backEvent) {
+    return false;
+  }
+
+  @override
+  void handleUpdateBackGestureProgress(PredictiveBackEvent backEvent) {}
 }
 
 ///

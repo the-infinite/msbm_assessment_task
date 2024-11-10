@@ -68,7 +68,7 @@ class AppIcons {
   static const folderRemove = "assets/icons/folder_remove.svg";
 
   /// The icon used to to navigate backward to the parent folder.
-  static const folderUp = "assets/icons/folder_add.svg";
+  static const folderUp = "assets/icons/folder_up.svg";
 
   /// The icon used to indicate a folder.
   static const folder = "assets/icons/folder.svg";

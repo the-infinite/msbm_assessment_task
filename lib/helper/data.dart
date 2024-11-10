@@ -4,8 +4,11 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:msbm_assessment_test/controllers/filesystem.dart';
+import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/helper/images.dart';
 import 'package:tray_manager/tray_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// A class that models the device specifications of this device that is the
 /// client which is connecting to the
@@ -144,21 +147,44 @@ String hash(String payload) {
 
 /// A utility function used to
 Future<void> initializeTray() async {
+  //? First, set the right icon.
   await trayManager.setIcon(
-    Platform.isWindows ? 'images/tray_icon.ico' : Images.launcherIcon,
+    Platform.isWindows ? Images.launcherIconWindows : Images.launcherIcon,
   );
+
+  //? Second, we use this to check if the sync folder already exists.
+  final driveFolder = await AppRegistry.find<FilesystemController>().driveDirectory;
+  final syncExists = await driveFolder.exists();
 
   //? This is the menu we are using...
   Menu menu = Menu(
     items: [
+      //* Only show this entire region if the sync folder exists...
+      if (syncExists) ...[
+        //? First, the option to go to the sync folder.
+        MenuItem(
+          key: 'open_drive',
+          label: 'Open Drive Folder',
+          onClick: (item) => launchUrl(driveFolder.uri),
+        ),
+
+        //? Second, the option to sync the folder now.
+        MenuItem(
+          key: 'sync_drive',
+          label: 'Sync Now',
+          onClick: (item) async {},
+        ),
+
+        // Finally, a separator.
+        MenuItem.separator(),
+      ],
+
       //? First, for the how button...
       MenuItem(
         key: 'show_window',
         label: 'Show/Hide Window',
       ),
 
-      // Some space.
-      MenuItem.separator(),
       //? Finally, for exiting the app.
       MenuItem(
         key: 'exit_app',

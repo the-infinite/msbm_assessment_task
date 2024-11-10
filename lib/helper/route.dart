@@ -3,7 +3,7 @@ import 'package:msbm_assessment_test/controllers/auth.dart';
 import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/screens/auth/register.dart';
 import 'package:msbm_assessment_test/screens/entry.dart';
-import 'package:msbm_assessment_test/screens/not_found.dart';
+import 'package:msbm_assessment_test/screens/errors/not_found.dart';
 import 'package:msbm_assessment_test/screens/welcome.dart';
 
 class RouteHelper {

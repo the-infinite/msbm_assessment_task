@@ -32,6 +32,9 @@ class Images {
   /// Image representing the launcher icon.
   static const launcherIcon = 'assets/image/launcher_icon.png';
 
+  /// Image representing the launcher icon for windows.
+  static const launcherIconWindows = 'assets/image/launcher_icon.ico';
+
   /// Image representing the Stripe Payments logo.
   static const stripe = 'assets/image/stripe.svg';
 }

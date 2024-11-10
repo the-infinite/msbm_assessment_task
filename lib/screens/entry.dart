@@ -7,7 +7,7 @@ import 'package:msbm_assessment_test/core/widget/boundary.dart';
 import 'package:msbm_assessment_test/controllers/navigation.dart';
 import 'package:msbm_assessment_test/helper/dimensions.dart';
 import 'package:msbm_assessment_test/screens/drive/entry.dart';
-import 'package:msbm_assessment_test/screens/not_found.dart';
+import 'package:msbm_assessment_test/screens/errors/not_found.dart';
 import 'package:msbm_assessment_test/screens/widget/drawer.dart';
 import 'package:msbm_assessment_test/screens/settings/entry.dart';
 import 'package:tray_manager/tray_manager.dart';
