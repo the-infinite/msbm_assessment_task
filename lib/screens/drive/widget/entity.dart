@@ -12,6 +12,7 @@ import 'package:msbm_assessment_test/helper/menus.dart';
 import 'package:msbm_assessment_test/helper/styles.dart';
 import 'package:msbm_assessment_test/helper/time.dart';
 import 'package:msbm_assessment_test/widgets/cards/file.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DirectoryEntryWidget extends StatelessWidget {
   final FileSystemEntity data;
@@ -64,12 +65,12 @@ class _DirectoryWidget extends StatelessWidget {
     final stat = data.statSync();
 
     //? Build and return the widget.
-    return InkWell(
-      onTap: () {
-        controller.setPath(data.path);
-      },
-      child: isParent
-          ? Row(
+    return isParent
+        ? InkWell(
+            onTap: () {
+              controller.setPath(data.path);
+            },
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -112,9 +113,14 @@ class _DirectoryWidget extends StatelessWidget {
                   ),
                 ),
               ],
-            )
-          : ContextMenuRegion(
-              contextMenu: ContextMenuHelper.getFolderMenu(data),
+            ),
+          )
+        : ContextMenuRegion(
+            contextMenu: ContextMenuHelper.getFolderMenu(data),
+            child: InkWell(
+              onTap: () {
+                controller.setPath(data.path);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -160,7 +166,7 @@ class _DirectoryWidget extends StatelessWidget {
                 ],
               ),
             ),
-    );
+          );
   }
 }
 
@@ -178,49 +184,54 @@ class _FileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ContextMenuRegion(
       contextMenu: ContextMenuHelper.getFileMenu(data),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //? First, the icon.
-          SvgPicture.asset(
-            AppIcons.file,
-            color: ThemeColors.brownColor,
-            height: Dimensions.fontSize5XL,
-          ),
-
-          // Some space.
-          const SizedBox(width: Dimensions.paddingSizeDefault),
-
-          //? Next, the filename.
-          Text(
-            controller.getFilename(data.path),
-            style: fontRegular.copyWith(
-              color: ThemeColors.colorNeutralDark,
-              fontSize: Dimensions.fontSizeLarge,
+      child: InkWell(
+        onTap: () {
+          launchUrl(data.uri);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //? First, the icon.
+            SvgPicture.asset(
+              AppIcons.file,
+              color: ThemeColors.brownColor,
+              height: Dimensions.fontSize5XL,
             ),
-          ),
 
-          // Next, boundless space.
-          const Spacer(),
+            // Some space.
+            const SizedBox(width: Dimensions.paddingSizeDefault),
 
-          //? Next, the synced card.
-          FileSyncedCard(
-            isSynced: controller.isSynced(data),
-          ),
-
-          // Some space.
-          const SizedBox(width: Dimensions.paddingSizeDefault),
-
-          //? Next, the filename.
-          Text(
-            "Last modified: ${DateTimeHelper.getFullTimestamp(data.lastModifiedSync())}",
-            style: fontRegular.copyWith(
-              color: ThemeColors.colorNeutralDark,
-              fontSize: Dimensions.fontSizeSmall,
+            //? Next, the filename.
+            Text(
+              controller.getFilename(data.path),
+              style: fontRegular.copyWith(
+                color: ThemeColors.colorNeutralDark,
+                fontSize: Dimensions.fontSizeLarge,
+              ),
             ),
-          ),
-        ],
+
+            // Next, boundless space.
+            const Spacer(),
+
+            //? Next, the synced card.
+            FileSyncedCard(
+              isSynced: controller.isSynced(data),
+            ),
+
+            // Some space.
+            const SizedBox(width: Dimensions.paddingSizeDefault),
+
+            //? Next, the filename.
+            Text(
+              "Last modified: ${DateTimeHelper.getFullTimestamp(data.lastModifiedSync())}",
+              style: fontRegular.copyWith(
+                color: ThemeColors.colorNeutralDark,
+                fontSize: Dimensions.fontSizeSmall,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
