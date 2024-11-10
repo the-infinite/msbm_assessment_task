@@ -138,7 +138,7 @@ class DriveScreen extends StatelessWidget {
 
     //? If this was cancelled...
     if (result == null) {
-      ModalHelper.showErrorDialog("Cancelled creating the folder");
+      ModalHelper.showSnackBar("Cancelled creating the folder");
       return;
     }
 
@@ -273,7 +273,7 @@ class DriveScreen extends StatelessWidget {
 
     //? If this was cancelled...
     if (result == null) {
-      ModalHelper.showErrorDialog("Cancelled creating the file");
+      ModalHelper.showSnackBar("Cancelled creating the file");
       return;
     }
 
@@ -395,12 +395,12 @@ class DriveScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //? First, the button that forces to sync this directory
-                        //? right now.
+                        //? First, the button that forces to sync the entire
+                        //? drive folder right now.
                         StyledTextButton(
-                          text: "Sync folder",
-                          onClick: () async {},
-                          endSvg: AppIcons.folderUp,
+                          text: "Sync drive",
+                          onClick: controller.syncChanges,
+                          endSvg: AppIcons.stateSyncing,
                           colorSvg: true,
                           textColor: Colors.black,
                           backgroundColor: ThemeColors.primaryColorLight,
@@ -409,20 +409,7 @@ class DriveScreen extends StatelessWidget {
                         // Some space.
                         const SizedBox(width: Dimensions.paddingSizeDefault),
 
-                        //? Second, the button that forces to sync the entire
-                        //? drive folder right now.
-                        StyledTextButton(
-                          text: "Sync drive",
-                          onClick: () async {},
-                          endSvg: AppIcons.stateSyncing,
-                          colorSvg: true,
-                          backgroundColor: ThemeColors.primaryColor,
-                        ),
-
-                        // Some space.
-                        const SizedBox(width: Dimensions.paddingSizeDefault),
-
-                        //? Third, the button that creates a new folder
+                        //? Second, the button that creates a new folder
                         StyledTextButton(
                           text: "New folder",
                           onClick: () => _createFolder(controller.currentPath, controller),
@@ -434,7 +421,7 @@ class DriveScreen extends StatelessWidget {
                         // Some space.
                         const SizedBox(width: Dimensions.paddingSizeDefault),
 
-                        //? Fourth, the button that creates a new file
+                        //? Third, the button that creates a new file
                         StyledTextButton(
                           text: "New file",
                           onClick: () => _createFile(controller.currentPath, controller),
@@ -447,6 +434,17 @@ class DriveScreen extends StatelessWidget {
 
                     // Some space.
                     const SizedBox(height: Dimensions.paddingSizeDefault),
+
+                    //? Next... if this is not the drive directory...
+                    if (controller.currentPath != controller.drivePath)
+                      DirectoryEntryWidget(
+                        data: Directory(controller.currentPath).parent,
+                        isParent: true,
+                      ),
+
+                    //? Next... if this is not the drive directory...
+                    if (controller.currentPath != controller.drivePath)
+                      const SizedBox(height: Dimensions.paddingSizeDefault),
 
                     //? We say there is nothing to show yet.
                     if (focused.isEmpty)
