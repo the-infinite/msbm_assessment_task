@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:msbm_assessment_test/controllers/app.dart';
 import 'package:msbm_assessment_test/controllers/filesystem.dart';
 import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/helper/images.dart';
@@ -172,9 +173,14 @@ Future<void> initializeTray() async {
         MenuItem(
           key: 'sync_drive',
           label: 'Sync Now',
-          onClick: (item) {
-            AppRegistry.find<FilesystemController>().silentSyncChanges();
-          },
+          onClick: (item) => AppRegistry.find<FilesystemController>().silentSyncChanges(),
+        ),
+
+        //? Second, the option to sync the folder now.
+        MenuItem(
+          key: 'toggle_usb_devices',
+          label: 'Enable/Disable USB Devices',
+          onClick: (item) => AppRegistry.find<AppController>().toggleUSBDevices(),
         ),
 
         // Finally, a separator.

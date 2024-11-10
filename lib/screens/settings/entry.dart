@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msbm_assessment_test/controllers/settings.dart';
+import 'package:msbm_assessment_test/controllers/socket.dart';
 import 'package:msbm_assessment_test/core/base.dart';
 import 'package:msbm_assessment_test/core/state/single_subscriber.dart';
 import 'package:msbm_assessment_test/helper/dimensions.dart';
@@ -131,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
             // Some space.
             const SizedBox(
-              height: Dimensions.paddingSize1XL,
+              height: Dimensions.paddingSizeDefault,
             ),
 
             //? Next, we create some more content.
@@ -153,6 +154,75 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ],
+            ),
+
+            //? Now for the buttons that assist with emulating websocket commands
+            ValueListenableBuilder(
+              valueListenable: _emulateWebsocket,
+              builder: (context, isEmulated, _) {
+                //? If this is not emulated...
+                if (!isEmulated) return const SizedBox();
+
+                //? Get the websocket controller.
+                final socket = AppRegistry.find<WebSocketController>();
+
+                //? Since it is emulated.
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Some space.
+                    const SizedBox(height: Dimensions.paddingSize3XL),
+
+                    Text(
+                      "WebSocket Commands Emulator",
+                      style: fontSemiBold.copyWith(
+                        fontSize: Dimensions.fontSize2XL,
+                      ),
+                    ),
+
+                    // Some space.
+                    const SizedBox(height: Dimensions.paddingSize1XL),
+
+                    //? This is fine.
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.15,
+                          child: StyledTextButton(
+                            text: "Disable USB Devices",
+                            svg: AppIcons.usbDisabled,
+                            colorSvg: true,
+                            spaceEvenly: null,
+                            onClick: () {
+                              socket.handleSocketCommand("usb device block");
+                            },
+                          ),
+                        ),
+
+                        // Some space.
+                        const SizedBox(width: Dimensions.paddingSizeDefault),
+
+                        //? Then enable the blocked USB devices
+                        SizedBox(
+                          width: size.width * 0.15,
+                          child: StyledTextButton(
+                            text: "Enable USB Devices",
+                            svg: AppIcons.usbEnabled,
+                            colorSvg: true,
+                            spaceEvenly: null,
+                            onClick: () {
+                              socket.handleSocketCommand("usb device unblock");
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         );

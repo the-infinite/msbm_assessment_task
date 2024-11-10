@@ -72,12 +72,12 @@ class WebSocketController extends StateController<WebSocketCommand, WebSocketRep
 
   /// A controller utility used to handle WebSocket commands that are either
   /// emulated or broadcasted from the [WebSocketChannel].
-  Future<bool> handleSocketCommand(String event, dynamic raw) async {
+  Future<bool> handleSocketCommand(String event, [dynamic raw]) async {
     //? Save the command.
     AppRegistry.debugLog("Command: $event", "Helpers.WebSocket");
 
     //? If this has been closed...
-    if (socketChannel.closeReason != null) return false;
+    if (_channel?.closeReason != null) return false;
 
     //? First, obtain the command.
     final command = WebSocketCommand.fromStream(event);

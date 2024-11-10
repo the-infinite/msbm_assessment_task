@@ -11,6 +11,7 @@ import 'package:tray_manager/tray_manager.dart';
 
 class AppController extends StateController<AppModel, AppRepository> {
   bool _isWindowShowing = true;
+  bool _usbStatus = true;
 
   // Construct.
   AppController({required super.repo}) {
@@ -84,16 +85,27 @@ class AppController extends StateController<AppModel, AppRepository> {
   /// Controller utility used to set the system tray icon to show that USB access
   /// is now blocked.
   void setUSBDisabledState() {
+    _usbStatus = false;
     trayManager.setIcon(AppIcons.usbDisabled);
     trayManager.setTitle("USB Access Blocked");
+    sendNotification("Use of USB ports have been disabled");
     if (!Platform.isLinux) trayManager.setToolTip("USB Access Blocked");
   }
 
   /// Controller utility used to set the system tray icon to show that USB access
   /// is now blocked.
   void setUSBEnabledState() {
-    trayManager.setIcon(AppIcons.usbDisabled);
+    _usbStatus = true;
+    trayManager.setIcon(AppIcons.usbEnabled);
     trayManager.setTitle("USB Access Allowed");
+    sendNotification("Use of USB ports have been enabled");
     if (!Platform.isLinux) trayManager.setToolTip("USB Access Allowed");
+  }
+
+  /// Controller utility used toggle the status of USB devices. When this is
+  /// enabled, so are USB devices.
+  void toggleUSBDevices() {
+    _usbStatus ? setUSBDisabledState() : setUSBEnabledState();
+    Future.delayed(const Duration(seconds: 2), setSyncingNoneState);
   }
 }
