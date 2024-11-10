@@ -34,6 +34,7 @@ Future<void> main() async {
 
   // Third, initialize the app registry.
   await AppRegistry.initialize(
+    forceLogs: true,
     routeHandler: RouteHelper.routeHandler,
     onLoggerFull: (logs) {
       AppRegistry.debugLog(logs);

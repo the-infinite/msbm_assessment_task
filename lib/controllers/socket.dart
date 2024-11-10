@@ -97,7 +97,7 @@ class WebSocketController extends StateController<WebSocketCommand, WebSocketRep
           if (command.modulator != "device") break;
 
           //? If the subcommand is null...
-          final subCommand = command.arguments.firstOrNull;
+          final subCommand = command.arguments.firstOrNull?.toLowerCase();
 
           //? If this is the block command.
           if (subCommand == "block") {
@@ -196,6 +196,14 @@ class WebSocketController extends StateController<WebSocketCommand, WebSocketRep
             return true;
           }
         }
+        break;
+
+      case "cmd-status":
+        {
+          return true;
+        }
+
+      default:
         break;
     }
 

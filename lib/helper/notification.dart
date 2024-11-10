@@ -13,7 +13,8 @@ class NotificationHelper {
 // Create an instance of Windows Notification with your application name
 // application id must be null in packaged mode
   static final _winNotifyPlugin = WindowsNotification(
-      applicationId: "rD65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\WindowsPowerShell\v1.0\\powershell.exe");
+    applicationId: "rD65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\WindowsPowerShell\v1.0\\powershell.exe",
+  );
 
   static Future<void> initialize(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationsSettings = InitializationSettings(
@@ -78,7 +79,7 @@ class NotificationHelper {
   ]) async {
     // create new NotificationMessage instance with id, title, body, and images
     NotificationMessage message = NotificationMessage.fromPluginTemplate(
-      "notification.${DateTime.now().millisecondsSinceEpoch}",
+      "nm${DateTime.now().millisecondsSinceEpoch}",
       title,
       body,
       largeImage: Images.launcherIconWindows,

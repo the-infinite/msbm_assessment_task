@@ -37,6 +37,7 @@ class RuntimeRegistry {
   LoggerUtility? _logger;
   int _stateUpdateCount = 0;
   bool _updating = false;
+  bool _forceLogs = false;
   Timer? _stateUpdateCycle;
   Map<String, List<String>>? _navigatorData;
   Widget Function(BuildContext context, String path)? _routeHandler;
@@ -87,11 +88,13 @@ class RuntimeRegistry {
     required FutureOr<void> Function(String) onLoggerFull,
     required Widget Function(BuildContext, String) routeHandler,
     Duration stateUpdateDuration = const Duration(seconds: 20),
+    bool forceLogs = false,
   }) async {
     _scheduler = await TaskScheduler.init();
     _logger = LoggerUtility(flush: onLoggerFull);
     _routeHandler = routeHandler;
     _stateUpdateTimer = stateUpdateDuration;
+    _forceLogs = forceLogs;
   }
 
   /// Adds a new [StateUpdateTask] to this [RuntimeRegistry]'s list of tasks
@@ -438,7 +441,7 @@ class RuntimeRegistry {
   /// note about this is that it ONLY logs when the app is in debug mode. To avoid
   /// exposing sensitive information in production environments.
   void debugLog(dynamic message, [String namespace = "AppRegistry.Log"]) {
-    if (kDebugMode) {
+    if (_forceLogs || kDebugMode) {
       debugPrint("[$namespace]: ${message.toString()}");
     }
   }
@@ -450,7 +453,7 @@ class RuntimeRegistry {
     StackTrace? stackTrace,
     String namespace = "AppRegistry.Log",
   }) {
-    if (kDebugMode) {
+    if (_forceLogs || kDebugMode) {
       debugPrintStack(stackTrace: stackTrace, label: "[$namespace]: ");
     }
   }

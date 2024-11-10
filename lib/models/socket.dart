@@ -18,7 +18,7 @@ class WebSocketCommand extends ObjectState {
     return WebSocketCommand(
       command: data[0].toString().toLowerCase(),
       modulator: data[1].toString().toLowerCase(),
-      arguments: data.skip(2).map((stream) => stream.toLowerCase()).toList(),
+      arguments: data.skip(2).map((stream) => stream.toString().trim()).toList(),
     );
   }
 

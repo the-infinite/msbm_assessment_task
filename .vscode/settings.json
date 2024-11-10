@@ -8,6 +8,7 @@
 		"bitsdojo",
 		"childs",
 		"msbm",
+		"ruleset",
 		"Tobi"
 	],
 	"cmake.ignoreCMakeListsMissing": true,
