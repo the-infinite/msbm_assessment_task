@@ -22,12 +22,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TrayListener {
   @override
   void initState() {
+    AppRegistry.debugLog("Listening on the current system tray", "Helpers.SystemTray");
     trayManager.addListener(this);
     super.initState();
   }
 
   @override
   void dispose() {
+    AppRegistry.debugLog("Dismissed the previous tray listener", "Helpers.SystemTray");
     trayManager.removeListener(this);
     super.dispose();
   }

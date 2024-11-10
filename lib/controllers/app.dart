@@ -12,6 +12,7 @@ import 'package:tray_manager/tray_manager.dart';
 class AppController extends StateController<AppModel, AppRepository> {
   bool _isWindowShowing = true;
 
+  // Construct.
   AppController({required super.repo}) {
     initialize(null);
   }
@@ -58,12 +59,16 @@ class AppController extends StateController<AppModel, AppRepository> {
   /// Controller utility used to set the system tray icon to the loading icon.
   void setSyncingState() {
     trayManager.setIcon(AppIcons.stateSyncing);
+    trayManager.setTitle("Syncing drive...");
+    if (!Platform.isLinux) trayManager.setToolTip("Syncing drive...");
   }
 
   /// Controller utility used to set the system tray icon to the icon used when
   /// loading has been completed.
   void setSyncingFinishedState() {
     trayManager.setIcon(AppIcons.stateLoaded);
+    trayManager.setTitle("All files synced!");
+    if (!Platform.isLinux) trayManager.setToolTip("All files synced!");
   }
 
   /// Controller utility used to set the system tray icon to the icon used when
@@ -72,5 +77,23 @@ class AppController extends StateController<AppModel, AppRepository> {
     trayManager.setIcon(
       Platform.isWindows ? Images.launcherIconWindows : Images.launcherIcon,
     );
+    trayManager.setTitle("");
+    if (!Platform.isLinux) trayManager.setToolTip("MSBM Assessment Task");
+  }
+
+  /// Controller utility used to set the system tray icon to show that USB access
+  /// is now blocked.
+  void setUSBDisabledState() {
+    trayManager.setIcon(AppIcons.usbDisabled);
+    trayManager.setTitle("USB Access Blocked");
+    if (!Platform.isLinux) trayManager.setToolTip("USB Access Blocked");
+  }
+
+  /// Controller utility used to set the system tray icon to show that USB access
+  /// is now blocked.
+  void setUSBEnabledState() {
+    trayManager.setIcon(AppIcons.usbDisabled);
+    trayManager.setTitle("USB Access Allowed");
+    if (!Platform.isLinux) trayManager.setToolTip("USB Access Allowed");
   }
 }

@@ -162,6 +162,12 @@ class AppIcons {
   /// or sold.
   static const transactions = "assets/icons/transactions.svg";
 
+  /// The official icon we use in the app to illustrate usb disabled signal.
+  static const usbDisabled = "assets/icons/usb_disabled.svg";
+
+  /// The official icon we use in the app to illustrate usb enabled signal.
+  static const usbEnabled = "assets/icons/usb_enabled.svg";
+
   /// The official icon we use in the app to illustrate users.
   static const users = "assets/icons/user.svg";
 

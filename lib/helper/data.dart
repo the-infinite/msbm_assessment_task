@@ -172,7 +172,9 @@ Future<void> initializeTray() async {
         MenuItem(
           key: 'sync_drive',
           label: 'Sync Now',
-          onClick: (item) async {},
+          onClick: (item) {
+            AppRegistry.find<FilesystemController>().silentSyncChanges();
+          },
         ),
 
         // Finally, a separator.
@@ -193,5 +195,6 @@ Future<void> initializeTray() async {
     ],
   );
 
+  //? Use this context menu.
   await trayManager.setContextMenu(menu);
 }
